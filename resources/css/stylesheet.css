@@ -1,0 +1,12 @@
+/* コンテンツを3つずつ並べるためのflexコンテナ */
+.content-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* コンテンツの要素 */
+.content {
+  width: calc((100% / 3) - 1rem); /* 横幅を3分割して、マージンを1rem分引いた幅に設定 */
+  margin-bottom: 1rem; /* 下に1remのマージンを追加 */
+}
