@@ -44,8 +44,8 @@
       <!-- Settings Dropdown -->
       <div class="hidden sm:flex sm:items-center sm:ml-6">
       <!--🔽 contact-->
-      <div>
-        <a href="/contact" class="inline-block h-15 w-56 text-center font-semibold text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-50 bg-teal-400 text-white rounded-sm py-2">{{ __('飼育員の方へ') }}<br>{{ __('チャンネル開設のお申し込み') }}</a>
+      <div class="inline-block h-15 w-56 text-center font-semibold text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-50 bg-teal-400 text-white rounded-sm py-2">
+        <a href="{{ route('contact') }}" >{{ __('飼育員の方へ') }}<br>{{ __('チャンネル開設のお申し込み') }}</a>
       </div>
         <x-dropdown align="right" width="48">
           <x-slot name="trigger">
@@ -125,7 +125,11 @@
     <div class="pt-4 pb-1 border-t border-gray-200 ">
       <!--🔽 contact-->
       <div class="bg-teal-300">
-         <a href="{{ route('contact') }}"><p class="mx-auto text-base text-blue-600">【飼育員の方へ】<br>チャンネル開設のお申し込み</p></a>
+        <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+            {{ __('飼育員の方へチャンネル開設のお申し込み') }}
+          </x-nav-link>
+         
+         <!--<a href="{{ route('contact') }}"><p class="mx-auto text-base text-blue-600">【飼育員の方へ】<br>チャンネル開設のお申し込み</p></a>-->
       </div>
       <div class="px-4">
         <div class="font-medium text-base text-gray-800 ">{{ Auth::user()->name }}</div>
