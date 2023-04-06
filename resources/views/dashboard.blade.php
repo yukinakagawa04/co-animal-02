@@ -1,6 +1,8 @@
 
     <head>
         <title>co-animal｜TOP</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-NKq3zHdJ+XV0gDkIhTDK2J0CfhZsWc4Jg4vi6FQH6I52nX16eN6SvEYIR3L6nHm8WxjKf0gfZ1di/UZzIV9XWQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     </head>
     <body>
         
@@ -41,6 +43,14 @@
                     <div>
                         <br>
                         <a href="{{ route('service') }}"><img src="{{ asset('images/banner01.png') }}" alt="" class="mx-auto"></a>
+                    </div>
+                    <!--シェアボタン-->
+                    <div class="container">
+                        <br>
+                        <div class="mx-auto" style="max-width: 300px;">
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
                     </div>
                 </div>
             </div>

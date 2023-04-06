@@ -45,7 +45,7 @@
                 </div>
             </div>
             
-            <div class=>
+            <div>
                 <div class=" py-2 mx-auto text-center max-w-xl  mx-auto sm:px-6 lg:px-8  bg-teal-100 overflow-hidden shadow-sm sm:rounded-lg ">
 
                     <p class="text-teal-400 text-xl font-bold">【β版公開中】生き物好きのみなさんへ</p>
@@ -55,8 +55,18 @@
                     <div class="mb-4 mx-auto text-center">
                         <a href="{{ route('dashboard') }}" class=" mx-auto inline-block px-4 py-2 rounded-full border-2 border-teal-400 text-teal-400 bg-teal-white font-bold hover:bg-teal-400 hover:text-white">{{ __('参加する') }}</a>
                     </div>
+                    <!--シェアボタン-->
+                      <div class="container">
+                          <br>
+                          <div class="mx-auto" style="max-width: 100px;">
+                              <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+                              <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                          </div>
+                      </div>
                 </div>
+                
             </div>
+            
         </div>
         
         <div>
