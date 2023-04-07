@@ -1,11 +1,12 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('コンテンツの詳細') }}
+      <!--タイトル-->
+      <p class="mb-2 uppercase font-bold text-lg text-gray-800 text-center" id="title_content">{{$content->title_content}}</p>
     </h2>
   </x-slot>
 
-  <div class="py-12">
+  <div class=>
     
     <div class="max-w-7xl mx-auto sm:w-8/12 md:w-1/2 lg:w-5/12">
       <div class="bg-white d overflow-hidden shadow-sm sm:rounded-lg">
@@ -13,11 +14,14 @@
           <div class="mb-6">
             <div class="flex flex-col mb-4">
                 <!--画像-->
-                    <img src="{{ asset('storage/contents/images/'.$content->image_content)}}"　class="mx-auto" >
+                    <div class="flex justify-center items-center w-64 h-64 overflow-hidden mx-auto rounded-lg">
+                      <img src="{{ asset('storage/contents/images/'.$content->image_content)}}" class="object-cover object-top w-full h-full" alt="image">
+                    </div>
                 <!--音声ファイル-->
-                    <audio controls src="{{ asset('storage/contents/audios/'.$content->audio)}}"></audio>
+                  <br>
+                    <audio controls src="{{ asset('storage/contents/audios/'.$content->audio)}}" class="mx-auto"></audio>
                 <!--タイトル-->
-                <p class="mb-2 uppercase font-bold text-lg text-gray-800 " id="title_content">{{$content->title_content}}</p>
+                
             </div>
             <!-- favorite 状態で条件分岐 -->
                       @if($content->users()->where('user_id', Auth::id())->exists())
