@@ -22,11 +22,11 @@
 
 
 <x-app-layout>
-    <div class="py-12">
-      <div class="mx-auto text-center">
-                <div class="max-w-sm mx-auto my-4">
+    <div class="">
+      <div class="mx-auto text-center max-w-xl">
+                <div class="max-w-xs mx-auto">
                   @foreach ($contents as $content)
-                    <div class="border p-4 border-gray-600 border-1 rounded-lg bg-white col-md-4 col-12">
+                    <div class="border p-4 border-gray-600 border-1 rounded-lg bg-white col-md-4 col-12 my-4">
                       <!--詳細の設定-->
                       <a href="{{ route('content.show',$content->id) }}">
                         <!--ユーザーネーム-->
