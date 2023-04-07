@@ -60,7 +60,7 @@
                       
                       <!--コメント一覧に遷移する-->
                         <x-secondary-button class="ml-3">
-                          <a href="{{ route('comment') }}"><p class="mx-auto text-base">コメント</p></a>
+                          <a href="{{ route('comment') }}"><p class="mx-auto text-base">コメントをみる</p></a>
                         </x-secondary-button>
                        
                       
