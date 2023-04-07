@@ -4,12 +4,12 @@
             <div class="object-fit">
                 <img src="{{ asset('images/logo02.png') }}" class="w-1/2 mx-auto" alt="">
             </div>
-            <div class=" mx-auto text-center">
-                <h1 class="text-teal-400 text-3xl font-bold">現地では聞けない生き物の裏話ができる<br>生き物の日常を飼育員の声で届ける音声配信サービス</h1>
+            <div class=" mx-auto text-center ">
+                <h1 class="text-teal-400 text-xl font-bold">現地では聞けない生き物の裏話ができる<br>生き物の日常を飼育員の声で届ける音声配信サービス</h1>
                 <br>
                 <br>
             </div>
-            <div class="w-1/2 mx-auto">
+            <div class="mx-auto max-w-3xl">
                 <p class="font-bold">水族館の生き物ってこんなに個性的なんだ。生き物のこういうところに着目すると面白いよ。最近生まれたこんな赤ちゃんがいるよ。など、全国の飼育員の生き物好き！な気持ちが集まって、皆さんの心に癒しをお届けするプラットフォームを目指しています。</p>
                 <br>
                 <p class="font-bold">生き物の魅力や楽しみ方がたくさんの人に広まれば、友人・家族など、大切な人と一緒に行きたい場所が見つかるかもしれない。推しの水族館・動物園が見つかるかもしれない。生き物と人々との関わりの選択肢をもっと広がるような活動をしていきたいと思います。</p>
