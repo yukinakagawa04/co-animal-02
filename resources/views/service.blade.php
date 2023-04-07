@@ -5,7 +5,7 @@
                 <img src="{{ asset('images/logo02.png') }}" class="w-1/2 mx-auto" alt="">
             </div>
             <div class=" mx-auto text-center ">
-                <h1 class="text-teal-400 text-xl font-bold">現地では聞けない生き物の裏話ができる<br>生き物の日常を飼育員の声で届ける音声配信サービス</h1>
+                <h1 class="text-teal-400 text-xl font-bold">動物のお話で癒される<br>飼育員の声でお届けする<br>音声配信サービス</h1>
                 <br>
                 <br>
             </div>
