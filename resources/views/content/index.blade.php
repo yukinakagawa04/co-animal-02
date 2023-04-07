@@ -22,17 +22,9 @@
 
 
 <x-app-layout>
-    <x-slot name="header">
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('コンテンツの一覧') }}
-      </h2>
-    </x-slot>
-    
-    
-  
     <div class="py-12">
       <div class="mx-auto text-center">
-                <div class="grid grid-cols-3 gap-4 max-w-6xl mx-auto">
+                <div class="max-w-sm mx-auto my-4">
                   @foreach ($contents as $content)
                     <div class="border p-4 border-gray-600 border-1 rounded-lg bg-white col-md-4 col-12">
                       <!--詳細の設定-->
@@ -82,6 +74,7 @@
                     </div>
                   @endforeach
                 </div>
+          
     </div>
   </div>
 
