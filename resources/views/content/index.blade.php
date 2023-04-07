@@ -1,9 +1,34 @@
+<head>
+        <title>co-animal｜コンテンツ一覧</title>
+        <style>
+          /* ここに上記のCSSコードを追加 */
+          /* デスクトップビュー */
+          @media screen and (min-width: 768px) {
+            .grid-cols-3 {
+              grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+          }
+          
+          /* スマートフォンビュー */
+          @media screen and (max-width: 767px) {
+            .grid-cols-3 {
+              grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+          }
+        </style>
+
+    </head>
+
+
+
 <x-app-layout>
     <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         {{ __('コンテンツの一覧') }}
       </h2>
     </x-slot>
+    
+    
   
     <div class="py-12">
       <div class="mx-auto text-center">
