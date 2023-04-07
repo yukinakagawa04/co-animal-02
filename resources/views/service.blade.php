@@ -16,7 +16,7 @@
                 <br>
             </div>
             <div class="object-fit border-rounded-lg">
-                <img src="{{ asset('images/lp_image05.jpeg') }}" class="w-1/2 mx-auto" alt="">
+                <img src="{{ asset('images/lp_image05.jpeg') }}" class="mx-auto" alt="">
             </div>
             <div class="mx-auto text-center max-w-3xl py-4">
                 <br>
