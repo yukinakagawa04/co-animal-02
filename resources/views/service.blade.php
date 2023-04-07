@@ -24,19 +24,19 @@
                 <br>
                 <div class="flex justify-center">
                     <div class="w-1/3 mx-auto">
-                        <img src="{{ asset('images/icon01.png') }}" class="w-100px mx-auto" alt="">
+                        <img src="{{ asset('images/icon01.png') }}" class="w-100px mx-auto sm:w-1/2" alt="">
                         <br>
                         <p class="text-teal-400 font-bold">生き物の様子を<br>
                         音声配信でお届け</p>
                     </div>
                     <div class="w-1/3 mx-auto">
-                        <img src="{{ asset('images/icon02.png') }}" class="w-100px mx-auto" alt="">
+                        <img src="{{ asset('images/icon02.png') }}" class="w-100px mx-auto sm:w-1/2" alt="">
                         <br>
                         <p class="text-slate-500 font-bold">推しの生き物で<br>
                         共鳴する</p>
                     </div>
                     <div class="w-1/3 mx-auto">
-                        <img src="{{ asset('images/icon02.png') }}" class="w-100px mx-auto" alt="">
+                        <img src="{{ asset('images/icon02.png') }}" class="w-100px mx-auto sm:w-1/2" alt="">
                         <br>
                         <p class="text-slate-500 font-bold">推しの生き物に<br>
                         投げエサできる</p>
