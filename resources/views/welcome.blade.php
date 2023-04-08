@@ -37,7 +37,7 @@
                     <br>
                     <br>
                 </div>
-                    <img src="{{ asset('images/lp_image03.png') }}" alt="">
+                    <img src="{{ asset('images/banner02.png') }}" alt="">
                 <div class="sm:flex sm:justify-center">
                     <div class="">
                     <br>
