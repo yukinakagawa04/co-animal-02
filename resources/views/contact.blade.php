@@ -1,3 +1,7 @@
+<head>
+  <title>co-animal｜お問い合わせ</title>
+</head>
+
 <x-app-layout>
     <div class="mx-auto">
         <div class="mt-4" style="width:100%;">

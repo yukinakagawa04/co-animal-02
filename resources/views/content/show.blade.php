@@ -1,5 +1,10 @@
+<head>
+  <title>{{$content->title_content}}｜co-animal</title>
+</head>
+
 <x-app-layout>
   <x-slot name="header">
+    
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
       <!--タイトル-->
       <p class="mb-2 uppercase font-bold text-lg text-gray-800 text-center" id="title_content">{{$content->title_content}}</p>
