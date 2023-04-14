@@ -9,7 +9,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Content;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +23,10 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::middleware('auth')->group(function () {
+    // 🔽 追加（検索画面）
+    Route::get('/tweet/search/input', [SearchController::class, 'create'])->name('search.input');
+    // 🔽 追加（検索処理）
+    Route::get('/tweet/search/result', [SearchController::class, 'index'])->name('search.result');
     // いいね機能
     Route::post('content/{content}/favorites', [FavoriteController::class, 'store'])->name('favorites');
     Route::post('content/{content}/unfavorites', [FavoriteController::class, 'destroy'])->name('unfavorites');

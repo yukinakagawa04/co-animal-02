@@ -19,10 +19,13 @@
 
     </head>
 
-
-
 <x-app-layout>
     <div class="">
+      <div>
+        @include('search.input')
+      </div>
+      
+      
       <div class="mx-auto text-center max-w-xl">
                 <div class="max-w-xs mx-auto">
                   @foreach ($contents as $content)
