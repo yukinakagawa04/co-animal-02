@@ -75,7 +75,7 @@
         
         <div>
             <br>
-            <a href=resources/views/service.blade.php><img src="{{ asset('images/banner01.png') }}" alt="" class="mx-auto"></a>
+            <a href="{{ route('service') }}"><img src="{{ asset('images/banner01.png') }}" alt="" class="mx-auto"></a>
             <br>
         </div>
     </div>
