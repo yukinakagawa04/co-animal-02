@@ -45,17 +45,17 @@
       <!-- Settings Dropdown -->
       <div class="hidden sm:flex sm:items-center sm:ml-6">
       <!--🔽 contact-->
-      <div class="inline-block h-15 w-56 text-center font-semibold text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-50 bg-teal-400 text-white rounded-sm py-2">
-        <a href="{{ route('contact') }}" >{{ __('飼育員の方へ') }}<br>{{ __('チャンネル開設のお申し込み') }}</a>
-      </div>
+      <!--<div class="inline-block h-15 w-56 text-center font-semibold text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-50 bg-teal-400 text-white rounded-sm py-2">-->
+      <!--  <a href="{{ route('contact') }}" >{{ __('飼育員の方へ') }}<br>{{ __('チャンネル開設のお申し込み') }}</a>-->
+      <!--</div>-->
         <x-dropdown align="right" width="48">
           <x-slot name="trigger">
             <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500  bg-white  hover:text-gray-700  focus:outline-none transition ease-in-out duration-150">
               <div>{{ Auth::user()->name }}</div>
 
               <div class="ml-1">
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
+                  <path fill="#21CCC0" d="M256,288c70.7,0,128-57.3,128-128S326.7,32,256,32S128,89.3,128,160S185.3,288,256,288z M256,352c-58.8,0-111.6,28.6-144.6,72.6 C123,454.9,135,480,157.2,480h197.6c22.2,0,34.2-25.1,21.8-39.4C367.6,380.6,314.8,352,256,352z"/>
                 </svg>
               </div>
             </button>

@@ -16,6 +16,7 @@
         </style>
     </head>
     <body class="antialiased">
+
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
@@ -35,15 +36,19 @@
                 <div class="sm:flex sm:justify-center">
                     <h2 class="font-semibold text-gray-600   focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">生き物の日常を飼育員の声で届ける音声配信サービス</h2>
                     <br>
+                
                     <br>
                 </div>
                     <img src="{{ asset('images/banner02.png') }}" alt="">
                 <div class="sm:flex sm:justify-center">
                     <div class="">
                     <br>
-                    <br>
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900  focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ログイン</a>
-                        <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ユーザー登録</a>
+                        <!--サービス紹介-->
+                        <div class="inline-block h-15 w-56 text-center font-semibold text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-50 bg-teal-400 text-white rounded-sm py-2">
+                            <a href="{{ route('service') }}" >{{ __('co-animalについて') }}</a>
+                        <br>
+                        </div>
+                        <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ユーザー登録はこちら</a>
 
                     </div>
                 </div>
