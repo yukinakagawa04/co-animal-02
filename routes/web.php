@@ -33,7 +33,8 @@ Route::middleware('auth')->group(function () {
     // マイページ機能
     Route::get('/content/mypage', [ContentController::class, 'mydata'])->name('content.mypage');
     // コメント機能
-    Route::post('content/{content_id}', [CommentController::class, 'store'])->name('comment.store');
+    Route::post('comment/{content_id}', [CommentController::class, 'store'])->name('comment.store');
+    //Route::post('content/{content_id}', [CommentController::class, 'store'])->name('comment.store');
     
     // ダッシュボードのコンテンツ一覧
     Route::get('dashboard/content', [DashboardController::class, 'index'])->name('dashboard.content');
@@ -49,6 +50,11 @@ Route::resource('partner', PartnerController::class);
 Route::resource('content', ContentController::class);
 //Route::resource('dashboard/content', DashboardController::class);
 
+Route::get('/comment/{content_id}', [CommentController::class,'show'])->name('comments.show');
+
+Route::get('comment/{id}', function () {
+    return view('comment.show');
+})->name('comment.show');
 
 
 Route::get('/', function () {
@@ -64,9 +70,6 @@ Route::get('/contact', function () {
     return view('contact');
     })->name('contact');
 
-Route::get('/comment', function () {
-    return view('comment');
-    })->name('comment');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])

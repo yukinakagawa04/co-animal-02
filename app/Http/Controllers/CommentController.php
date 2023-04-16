@@ -8,10 +8,15 @@ use App\Models\Comment;
 
 use Auth;
 
+
 class CommentController extends Controller
 {
-    
-    
+    public function index(Request $Request)
+    {
+        $comments = Comment::orderBy('created_at', 'desc')->get();
+        return view('comment.show', ['comments' => $comments]);
+
+    }    
     
     public function store(Request $request)
     {
@@ -35,16 +40,18 @@ class CommentController extends Controller
         $comments = Comment::where('content_id', $data['content_id'])
                             ->orderBy('created_at', 'desc')
                             ->get();
-                            
-        return view('comment', ['comments' => $comments]);
+        return view('comment.show', ['comments' => $comments]);
     }
     
     
 
-    public function show($id)
-    {
-        //
-    }
+        public function show(Request $request, $content_id)
+        {
+            $comments = Comment::where('content_id', $content_id)
+                               ->orderBy('created_at', 'desc')
+                               ->get();
+            return view('comment', compact('comments'));
+        }
 
     /**
      * Show the form for editing the specified resource.

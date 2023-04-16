@@ -63,35 +63,37 @@
                       
                       <br>
                       
-                      <!--コメント一覧に遷移する-->
-                        <x-secondary-button class="ml-3">
-                          <a href="{{ route('comment') }}"><p class="mx-auto text-base">コメントをみる</p></a>
-                        </x-secondary-button>
+
                        
                       
                      
                       <!--コメント入力-->
-                      <div class="p-6 bg-white  border-b border-gray-200 ">
-                        <form class="mb-6" action={{route('comment.store', auth() ->user()->id, $content)}} method="POST" class="mt-8">
-                            @csrf
-                            <div class="mb-4">
-                              <input type="hidden" name="content_id" value="{{ $content->id }}">
-                              <x-input-label for="comment" :value="__('コメント')" />
-                                <x-text-input id="comment" class="block mt-1 w-full" type="text" name="comment" :value="old('comment')" required autofocus />
-                                <x-input-error :messages="$errors->get('comment')" class="mt-2" />
-                            </div>
-                            <div class="flex items-center justify-end mt-4">
-                                <x-primary-button class="ml-3">
-                                  {{ __('投稿する') }}
-                                </x-primary-button>
-                            </div>
+                      <div class="p-2 bg-white">
+                        <form class="mb-6" action="{{ route('comment.store', $content->id) }}" method="POST" class="mt-8">
+                          @csrf
+                          <div class="mb-4">
+                            <input type="hidden" name="content_id" value="{{ $content->id }}">
+                            <x-input-label for="comment" :value="__('コメント')" />
+                            <x-text-input id="comment" class="block mt-1 w-full" type="text" name="comment" :value="old('comment')" required autofocus />
+                            <x-input-error :messages="$errors->get('comment')" class="mt-2" />
+                          </div>
+                          <div class="flex items-center justify-end mt-4">
+                            <x-primary-button>
+                              {{ __('コメント') }}
+                            </x-primary-button>
+                          </div>
                         </form>
                       </div>
-            
+                      
+                      <div class="flex items-center justify-end mt-4">
+                        <a href="{{ route('comments.show', $content->id) }}" class="text-sm text-gray-500 underline">{{ __('コメント一覧を表示する') }}</a>
+                      </div>
           
 
             </div>
+            <div class="border-b border-gray-200"></div>
             <a href="{{ route('content.index') }}">
+              <br>
               <x-secondary-button class="ml-3">
                 {{ __('戻る') }}
               </x-secondary-button>
