@@ -48,8 +48,14 @@
                             <a href="{{ route('service') }}" >{{ __('co-animalについて') }}</a>
                         <br>
                         </div>
-                        <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ユーザー登録はこちら</a>
-
+                        <div>
+                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ユーザー登録はこちら</a>
+                        </div>
+                        <div>
+                            <a href="https://forms.gle/yLxVQwZBkY8Jcnfy7">サービスのご意見箱
+                                <img src="{{ asset('images/image01.png') }}" alt="" class="mx-auto" style="max-width: 100px;">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
