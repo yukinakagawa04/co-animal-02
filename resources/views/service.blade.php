@@ -73,9 +73,9 @@
                     <div>
                         <div class=" py-2 mx-auto text-center max-w-xl  mx-auto sm:px-6 lg:px-8  bg-teal-100 overflow-hidden shadow-sm sm:rounded-lg ">
         
-                            <p class="text-teal-400 text-xl font-bold">【β版公開中】生き物好きのみなさんへ</p>
+                            <p class="text-teal-400 text-xl font-bold">【α版公開中】生き物好きのみなさんへ</p>
                             <br>
-                            <p class="font-bold">サービスのβ版をクローズで公開しており、サービスに関するアドバイスをしてくださるユーザーさんを募集しています。</p>
+                            <p class="font-bold">サービスのα版をクローズで公開しており、サービスに関するアドバイスをしてくださるユーザーさんを募集しています。</p>
                             <br>
                         </div>
                         
