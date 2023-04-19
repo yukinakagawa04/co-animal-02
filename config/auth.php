@@ -40,8 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+    
+        'admin' => [                // admin追加
+            'driver' => 'session',  // admin追加
+            'provider' => 'admins', // admin追加
+        ],                          // admin追加
     ],
 
+    
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -64,6 +70,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        
+        'admins' => [                           // admin追加
+            'driver' => 'eloquent',             // admin追加
+            'model' => App\Models\Admin::class, // admin追加
+        ], 
 
         // 'users' => [
         //     'driver' => 'database',
@@ -93,6 +104,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        
+        'admins' => [                     // admin追加
+            'provider' => 'admins',       // admin追加
+            'table' => 'password_resets', // admin追加
+            'expire' => 60,               // admin追加
+            'throttle' => 60,             // admin追加
+        ],                                // admin追加
     ],
 
     /*

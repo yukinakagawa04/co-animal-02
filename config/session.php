@@ -17,6 +17,14 @@ return [
     |            "memcached", "redis", "dynamodb", "array"
     |
     */
+    
+    'cookie' => env(
+        'SESSION_COOKIE',
+        Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
+    ),
+    'cookie_admin' => Str::slug(env('APP_NAME', 'laravel'), '_').'_session_admin', // admin追加
+    
+    
 
     'driver' => env('SESSION_DRIVER', 'file'),
 

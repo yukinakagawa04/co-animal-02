@@ -12,10 +12,11 @@
           <div class="flex justify-center items-center w-64 h-64 overflow-hidden mx-auto rounded-lg">
             <img src="{{ asset('storage/contents/images/'.$content->image_content)}}" class="object-cover object-top w-full h-full" alt="image">
           </div>
+        </a>
           <br>
           <!--音声ファイル-->
           <audio controls src="{{ asset('storage/contents/audios/'.$content->audio)}}" class="mx-auto"></audio>
-        </a>
+        
       </div>
     @endforeach
 </div>      

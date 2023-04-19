@@ -47,7 +47,17 @@ class AppServiceProvider extends ServiceProvider
         // 一般ユーザーに許可
         Gate::define('user-higher', function ($user) {
             return ($user->role > 20 && $user->role <= 100);
+            
+            
+            
+            
+        // ポリシーの登録
+        $this->registerPolicies();
+        
+        if (request()->is('admin/*')) {
+            config(['session.cookie' => config('session.cookie_admin')]);
+        }
+        
         });
     }
-
 }

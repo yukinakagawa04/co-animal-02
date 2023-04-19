@@ -42,6 +42,7 @@
                           <img src="{{ asset('storage/contents/images/'.$content->image_content)}}" class="object-cover object-top w-full h-full" alt="image">
                         </div>
                         <br>
+                      </a>
                         <!--音声ファイル-->
                         <audio controls src="{{ asset('storage/contents/audios/'.$content->audio)}}" class="mx-auto"></audio>
                         
@@ -73,7 +74,6 @@
                             </x-primary-button>
                           </form>
                         @endif
-                      </a>
                     </div>
                   @endforeach
                 </div>

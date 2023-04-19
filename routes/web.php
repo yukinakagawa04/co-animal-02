@@ -10,6 +10,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Content;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ProfileController as ProfileOfAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,21 @@ Route::middleware('auth')->group(function () {
     Route::get('comment',[CommentController::class,'store'])->name('test');
     Route::get('/content', [ContentController::class, 'index'])->name('test');
 });
+
+Route::prefix('admin')->name('admin.')->group(function(){
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->middleware(['auth:admin', 'verified'])->name('dashboard');
+
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileOfAdminController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileOfAdminController::class, 'destroy'])->name('profile.destroy');
+    });
+
+    require __DIR__.'/admin.php';
+});
+
 
 Route::resource('tweet', TweetController::class);
 Route::resource('partner', PartnerController::class);
