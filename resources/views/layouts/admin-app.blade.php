@@ -16,12 +16,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @if (auth()->guard('admin')->check())
-                @include('layouts.admin-navigation')
-            @else
-                @include('layouts.navigation')
-            @endif
-          
+            @include('layouts.navigation')
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -33,9 +28,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            
         </div>
     </body>
 </html>

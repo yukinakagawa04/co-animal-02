@@ -5,22 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Comment;
-
+use App\Http\Controllers\Admin;
 use Auth;
 
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('store');
+    }
+    
     public function index(Request $Request)
     {
         $comments = Comment::orderBy('created_at', 'desc')->get();
         return view('comment.show', ['comments' => $comments]);
-
     }    
     
     public function store(Request $request)
     {
-        $user = auth()->user();
+        if (Auth::guard('admin')->check()) {
+            $user = Auth::guard('admin')->user();
+        } else {
+            $user = auth()->user();
+        }
+        
         $data = $request->all();
     
         $validator = Validator::make($data, [
@@ -45,13 +54,14 @@ class CommentController extends Controller
     
     
 
-        public function show(Request $request, $content_id)
-        {
-            $comments = Comment::where('content_id', $content_id)
+    public function show(Request $request, $content_id)
+    {
+        $this->middleware('auth')->except('store');
+        $comments = Comment::where('content_id', $content_id)
                                ->orderBy('created_at', 'desc')
                                ->get();
-            return view('comment', compact('comments'));
-        }
+        return view('comment', compact('comments'));
+    }
 
     /**
      * Show the form for editing the specified resource.

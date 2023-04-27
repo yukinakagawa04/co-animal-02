@@ -12,10 +12,11 @@
 
         <!-- Navigation Links -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-          <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-            {{ __('co-animal TOP') }}
-          </x-nav-link>
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                        {{ __('co-animal TOP') }}
+                    </x-nav-link>
         </div>
+        
         <!-- 🔽 一覧ページへのリンクを追加 -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
           <x-nav-link :href="route('content.index')" :active="request()->routeIs('content.index')">
@@ -24,24 +25,19 @@
         </div>
         
         <!-- 🔽 作成ページへのリンクを追加 -->
-        @can('business-higher')　{{-- 管理者に表示される --}}
-          @if (Auth::user()->role >= 11 && Auth::user()->role <= 20)
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
               <x-nav-link :href="route('content.create')" :active="request()->routeIs('content.create')" class="">
                 {{ __('コンテンツを作成する') }}
               </x-nav-link>
             </div>
-          @endif
-        @endcan
+
         <!-- 🔽 マイページへのリンクを追加 -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-          <x-nav-link :href="route('content.mypage')" :active="request()->routeIs('content.mypage')" class="hidden">
+          <x-nav-link :href="route('content.mypage')" :active="request()->routeIs('content.mypage')" class="">
             {{ __('あなたのコンテンツ') }}
           </x-nav-link>
         </div>
-
       </div>
-
       <!-- Settings Dropdown -->
       <div class="hidden sm:flex sm:items-center sm:ml-6">
       <!--🔽 contact-->
@@ -51,7 +47,7 @@
         <x-dropdown align="right" width="48">
           <x-slot name="trigger">
             <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500  bg-white  hover:text-gray-700  focus:outline-none transition ease-in-out duration-150">
-              <div>{{ Auth::user()->name }}</div>
+              <div>{{ Auth::guard('admin')->user()->name }}</div>
 
               <div class="ml-1">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
@@ -67,7 +63,7 @@
               </x-dropdown-link>
           
               <!-- Authentication -->
-              <form method="POST" action="{{ route('logout') }}">
+              <form method="POST" action="{{ route('adminlogout') }}">
                   @csrf
           
                   @if (Auth::guard('admin')->check())
@@ -76,7 +72,7 @@
                           {{ __('管理者ログアウト') }}
                       </x-dropdown-link>
                   @else
-                      <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
+                      <x-dropdown-link :href="route('adminlogout')" onclick="event.preventDefault();
                           this.closest('form').submit();">
                           {{ __('ログアウト') }}
                       </x-dropdown-link>
@@ -142,8 +138,8 @@
          <!--<a href="{{ route('contact') }}"><p class="mx-auto text-base text-blue-600">【飼育員の方へ】<br>チャンネル開設のお申し込み</p></a>-->
       </div>
       <div class="px-4">
-        <div class="font-medium text-base text-gray-800 ">{{ Auth::user()->name }}</div>
-        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+        <div class="font-medium text-base text-gray-800">{{ Auth::guard('admin')->user()->name }}</div>
+        <div class="font-medium text-sm text-gray-500">{{ Auth::guard('admin')->user()->email }}</div>
       </div>
 
       <div class="mt-3 space-y-1">

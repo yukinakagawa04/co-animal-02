@@ -17,21 +17,37 @@
     </head>
     <body class="antialiased">
 
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
-            @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900  focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ENTER</a>
-                    @else
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900  focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ログイン</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900  focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ユーザー登録</a>
+            <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+               @if (Route::has('admin.login'))
+                @auth
+                    <div>
+                        <a href="{{ url('Admin/dashboard') }}"  class="mr-5 hover:text-gray-900">飼育員マイページ</a>
+                    </div>
+                @else
+                
+                    <a href="{{ route('admin.login') }}"  class="mr-5 hover:text-gray-900">飼育員ログイン</a>
+                    
+                        @if (Route::has('admin.register'))
+                    <a href="{{ route('admin.register') }}"  class="mr-5 hover:text-gray-900">飼育員新規登録</a>
                         @endif
-                    @endauth
-                </div>
-            @endif
-
+                     @endauth
+                 </nav>
+             @endif
+             
+             <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+             @if (Route::has('login'))
+                 @auth
+                  <a href="{{ url('/dashboard') }}" class="mr-5 hover:text-gray-900">ユーザーマイページ</a>
+                      @else
+                      <a href="{{ route('login') }}"  class="mr-5 hover:text-gray-900">ユーザーログイン</a>
+              
+                           @if (Route::has('register'))
+              <a href="{{ route('register') }}" class="mr-5 hover:text-gray-900">ユーザー新規登録</a>
+                    @endif
+               @endauth
+             </nav>
+             @endif
+        
             <div class="max-w-7xl mx-auto p-6 lg:p-8"  bg-white-100>
                 <div class="sm:flex sm:justify-center">
                     <h2 class="font-semibold text-gray-600   focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">生き物の日常を飼育員の声で届ける音声配信サービス</h2>

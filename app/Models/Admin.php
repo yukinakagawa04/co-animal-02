@@ -15,6 +15,10 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'prefecture',
+        'image',
+        'description',
+        
     ];
 
     protected $hidden = [
@@ -25,4 +29,10 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    // adminユーザー
+    public function admin()
+        {
+        return $this->belongsTo(Content::class);
+        }
 }

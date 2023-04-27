@@ -38,4 +38,10 @@ class Content extends Model
         {
         return $this->hasMany(Comment::class);
         }
+    
+    // adminユーザー
+    public function admin()
+        {
+    return $this->belongsTo(Admin::class);
+        }
 }

@@ -3,21 +3,18 @@
 </head>
 
 <x-app-layout>
-  <x-slot name="header">
-    
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      <!--タイトル-->
-      <p class="mb-2 uppercase font-bold text-lg text-gray-800 text-center" id="title_content">{{$content->title_content}}</p>
-    </h2>
-  </x-slot>
-
   <div class=>
-    
     <div class="max-w-7xl mx-auto sm:w-8/12 md:w-1/2 lg:w-5/12">
-      <div class="bg-white d overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white  border-b border-gray-200 ">
           <div class="mb-6">
             <div class="flex flex-col mb-4">
+                <!--タイトル-->
+                  <p class="mb-2 uppercase font-bold text-lg text-gray-800 text-center text-xl font-semibold " id="title_content">{{$content->title_content}}</p>
+                <!--ユーザーネーム-->
+                  @if ($content->admin)
+                    <p class="text-gray-800 mx-auto text-center">{{ $content->admin->name }}</p>
+                  @endif
                 <!--画像-->
                     <div class="flex justify-center items-center w-64 h-64 overflow-hidden mx-auto rounded-lg">
                       <img src="{{ asset('storage/contents/images/'.$content->image_content)}}" class="object-cover object-top w-full h-full" alt="image">
@@ -25,10 +22,7 @@
                 <!--音声ファイル-->
                   <br>
                     <audio controls src="{{ asset('storage/contents/audios/'.$content->audio)}}" class="mx-auto"></audio>
-                <!--タイトル-->
-                
-            </div>
-            <!-- favorite 状態で条件分岐 -->
+                <!-- favorite 状態で条件分岐 -->
                       @if($content->users()->where('user_id', Auth::id())->exists())
                       <!-- unfavorite ボタン -->
                       <form action="{{ route('unfavorites',$content) }}" method="POST" class="text-left">
@@ -60,13 +54,8 @@
                               <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                           </div>
                       </div>
-                      
                       <br>
-                      
 
-                       
-                      
-                     
                       <!--コメント入力-->
                       <div class="p-2 bg-white">
                         <form class="mb-6" action="{{ route('comment.store', $content->id) }}" method="POST" class="mt-8">

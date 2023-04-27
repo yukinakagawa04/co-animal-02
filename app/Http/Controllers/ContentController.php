@@ -7,6 +7,7 @@ use Validator;
 use App\Models\Content;
 use Auth;
 use App\Models\User;
+use App\Http\Controllers\Admin;
 
 
 class ContentController extends Controller
@@ -45,7 +46,7 @@ class ContentController extends Controller
         //送る内容を再度定義する
         $content = new Content();
                 //idの
-                $content -> user_id = Auth ::user() -> id;
+                $content->admin_id = Auth::guard('admin')->user()->id;
                 //title_contentの
                 $content -> title_content = request() -> title_content;
                 //image_contentの
@@ -81,7 +82,7 @@ class ContentController extends Controller
             }
           
         // フォームから送信されてきたデータとユーザIDをマージし，DBにinsertする
-        $data = $request->merge(['user_id' => Auth::user()->id])->all();
+        $data = $request->merge(['admin_id' => Auth::user()->id])->all();
         // create()は最初から用意されている関数
         // 戻り値は挿入されたレコードの情報
         $result = Content::create($data);

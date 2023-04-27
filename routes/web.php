@@ -11,6 +11,10 @@ use App\Http\Controllers\Content;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController as ProfileOfAdminController;
+use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\AdminRegisterController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +26,37 @@ use App\Http\Controllers\ProfileController as ProfileOfAdminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+    //adminのルーティング
+    Route::group(['prefix' => 'admin'], function () {
+        // 登録
+        Route::get('register', [AdminRegisterController::class, 'create'])
+            ->name('admin.register');
+    
+        Route::post('register', [AdminRegisterController::class, 'store']);
+    
+        // ログイン
+        Route::get('login', [AdminLoginController::class, 'showLoginPage'])
+            ->name('admin.login');
+    
+        Route::post('login', [AdminLoginController::class, 'login']);
+    
+        // 以下の中は認証必須のエンドポイントとなる
+        Route::middleware(['auth:admin'])->group(function () {
+            // ダッシュボード
+            Route::get('dashboard', fn() => view('admin.dashboard'))
+                ->name('admin.dashboard');
+        // ログアウト          
+        Route::post('adminlogout', [AdminLoginController::class, 'adminlogout'])->name('adminlogout');  
+        //ログアウト
+        Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+        // ダッシュボード
+        Route::get('dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
+                
+        });
+    });
 
-Route::middleware('auth')->group(function () {
+
+
     // 🔽 追加（検索画面）
     Route::get('/tweet/search/input', [SearchController::class, 'create'])->name('search.input');
     // 🔽 追加（検索処理）
@@ -33,45 +66,25 @@ Route::middleware('auth')->group(function () {
     Route::post('content/{content}/unfavorites', [FavoriteController::class, 'destroy'])->name('unfavorites');
     // マイページ機能
     Route::get('/content/mypage', [ContentController::class, 'mydata'])->name('content.mypage');
-    // コメント機能
-    Route::post('comment/{content_id}', [CommentController::class, 'store'])->name('comment.store');
-    //Route::post('content/{content_id}', [CommentController::class, 'store'])->name('comment.store');
-    
+
     // ダッシュボードのコンテンツ一覧
     Route::get('dashboard/content', [DashboardController::class, 'index'])->name('dashboard.content');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/content', [ContentController::class, 'index'])->name('content.index');
-
-    Route::get('comment',[CommentController::class,'store'])->name('test');
     Route::get('/content', [ContentController::class, 'index'])->name('test');
-});
-
-Route::prefix('admin')->name('admin.')->group(function(){
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->middleware(['auth:admin', 'verified'])->name('dashboard');
-
-    Route::middleware('auth:admin')->group(function () {
-        Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileOfAdminController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileOfAdminController::class, 'destroy'])->name('profile.destroy');
-    });
-
-    require __DIR__.'/admin.php';
-});
 
 
-Route::resource('tweet', TweetController::class);
-Route::resource('partner', PartnerController::class);
-Route::resource('content', ContentController::class);
-//Route::resource('dashboard/content', DashboardController::class);
-
+// コメント機能
+Route::post('comment/{content_id}', [CommentController::class, 'store'])->name('comment.store');
 Route::get('/comment/{content_id}', [CommentController::class,'show'])->name('comments.show');
 
 Route::get('comment/{id}', function () {
     return view('comment.show');
 })->name('comment.show');
 
+Route::resource('tweet', TweetController::class);
+Route::resource('partner', PartnerController::class);
+Route::resource('content', ContentController::class);
 
 Route::get('/', function () {
     return view('welcome');

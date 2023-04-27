@@ -33,7 +33,9 @@
                       <!--詳細の設定-->
                       <a href="{{ route('content.show',$content->id) }}">
                         <!--ユーザーネーム-->
-                        <p class="text-gray-800 mx-auto">{{$content->user->name}}</p>
+                        @if ($content->admin)
+                          <p class="text-gray-800 mx-auto">{{ $content->admin->name }}</p>
+                        @endif
                         <!--タイトル-->
                         <h3 class="font-bold text-lg text-gray-dark mx-auto ">{{$content->title_content}}</h3>
                         <br>
