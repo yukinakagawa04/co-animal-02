@@ -32,7 +32,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
         Route::get('register', [AdminRegisterController::class, 'create'])
             ->name('admin.register');
     
-        Route::post('register', [AdminRegisterController::class, 'store']);
+        Route::post('register', [AdminRegisterController::class, 'store'])
+            ->name('admin.store');
     
         // ログイン
         Route::get('login', [AdminLoginController::class, 'showLoginPage'])

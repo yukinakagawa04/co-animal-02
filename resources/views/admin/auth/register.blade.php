@@ -1,6 +1,6 @@
 <x-guest-layout>
     <h1 class="text-white">Adminの登録</h1>
-    <form method="POST" action="{{ route('admin.register') }}">
+    <form method="POST" action="{{ route('admin.store') }}">
         @csrf
 
         <!-- Name -->
@@ -9,6 +9,9 @@
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
+        @if ($errors->has('name'))
+          <div>{{ $errors->first('name') }}</div>
+        @endif
 
         <!-- Email Address -->
         <div class="mt-4">
@@ -16,6 +19,9 @@
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
+        @if ($errors->has('email'))
+          <div>{{ $errors->first('email') }}</div>
+        @endif
 
         <!-- Password -->
         <div class="mt-4">
@@ -28,6 +34,9 @@
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
+        @if ($errors->has('password'))
+          <div>{{ $errors->first('password') }}</div>
+        @endif
 
         <!-- Confirm Password -->
         <div class="mt-4">
@@ -39,6 +48,9 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
+        @if ($errors->has('password_confirmation'))
+          <div>{{ $errors->first('password_confirmation') }}</div>
+        @endif
         
         <!-- 園館の場所（都道府県） -->
         <div class="mt-4">
@@ -97,6 +109,9 @@
             </select>
             <x-input-error :messages="$errors->get('prefecture')" class="mt-2" />
         </div>
+        @if ($errors->has('prefecture'))
+          <div>{{ $errors->first('prefecture') }}</div>
+        @endif
         
         <!-- プロフィール画像 -->
         <div class="mt-4">
@@ -104,6 +119,9 @@
             <x-text-input id="image" class="block mt-1 w-full" type="file" name="image" :value="old('image')" required autocomplete="image" />
             <x-input-error :messages="$errors->get('image')" class="mt-2" />
         </div>
+        @if ($errors->has('image'))
+          <div>{{ $errors->first('image') }}</div>
+        @endif
         
         <!-- チャンネル説明 -->
         <div class="mt-4">
@@ -111,6 +129,9 @@
             <x-text-input id="description" class="block mt-1 w-full height: 200px " type="text"  name="description" :value="old('description')" required autocomplete="description" />
             <x-input-error :messages="$errors->get('description')" class="mt-2" />
         </div>
+        @if ($errors->has('description'))
+          <div>{{ $errors->first('description') }}</div>
+        @endif
         
 
         <div class="flex items-center justify-end mt-4">

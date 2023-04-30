@@ -1,22 +1,5 @@
 <head>
         <title>co-animal｜コンテンツ一覧</title>
-        <style>
-          /* ここに上記のCSSコードを追加 */
-          /* デスクトップビュー */
-          @media screen and (min-width: 768px) {
-            .grid-cols-3 {
-              grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
-          }
-          
-          /* スマートフォンビュー */
-          @media screen and (max-width: 767px) {
-            .grid-cols-3 {
-              grid-template-columns: repeat(1, minmax(0, 1fr));
-            }
-          }
-        </style>
-
     </head>
 
 <x-app-layout>

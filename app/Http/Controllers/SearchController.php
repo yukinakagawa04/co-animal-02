@@ -20,6 +20,12 @@ class SearchController extends Controller
     
         // 名前にキーワードを含むユーザーの ID を取得
         $userIds = User::where('name', 'like', "%{$keyword}%")->pluck('id')->toArray();
+        
+        // prefectureカラムにキーワードを含むユーザーの ID を取得
+        $userIdsFromPrefecture = Admin::where('prefecture', 'like', "%{$keyword}%")->pluck('id')->toArray();
+    
+        // 名前またはprefectureカラムにキーワードを含むユーザーの ID をマージ
+        $userIds = array_unique(array_merge($userIds, $userIdsFromPrefecture));
     
         // コンテンツを検索
         $contents = Content::query()
