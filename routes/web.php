@@ -59,9 +59,9 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
     // 🔽 追加（検索画面）
-    Route::get('/tweet/search/input', [SearchController::class, 'create'])->name('search.input');
+    Route::get('/content/search/input', [SearchController::class, 'create'])->name('search.input');
     // 🔽 追加（検索処理）
-    Route::get('/tweet/search/result', [SearchController::class, 'index'])->name('search.result');
+    Route::get('/content/search/result', [SearchController::class, 'index'])->name('search.result');
     // いいね機能
     Route::post('content/{content}/favorites', [FavoriteController::class, 'store'])->name('favorites');
     Route::post('content/{content}/unfavorites', [FavoriteController::class, 'destroy'])->name('unfavorites');

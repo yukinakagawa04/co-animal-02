@@ -42,6 +42,13 @@ class Content extends Model
     // adminユーザー
     public function admin()
         {
-    return $this->belongsTo(Admin::class);
+        return $this->belongsTo(Admin::class);
         }
+        
+    // admin：いいね機能
+    public function admins()
+        {
+        return $this->belongsToMany(Admin::class)->withTimestamps();
+        }
+     
 }

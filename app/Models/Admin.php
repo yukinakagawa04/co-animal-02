@@ -10,6 +10,8 @@ use Laravel\Sanctum\HasApiTokens;
 class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'name',
@@ -35,4 +37,20 @@ class Admin extends Authenticatable
         {
         return $this->belongsTo(Content::class);
         }
+        
+        
+    // コンテンツとadminユーザーに多対多モデルがある
+    public function contents()
+        {
+        return $this->belongsToMany(Content::class, 'content_admin')->withTimestamps();
+        }
+     
+    // adminいいね機能  
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    
 }
+

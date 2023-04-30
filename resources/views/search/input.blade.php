@@ -5,27 +5,18 @@
       <div class="bg-whiteoverflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200  ">
           @include('common.errors')
-          <form class="mb-6">
+          <form class="mb-6" action="{{ route('search.result') }}" method="GET">
             @csrf
-            <div id="keyword-search-button" class="bg-teal-400 text-white font-bold py-2 px-4 rounded" type="button">
+            <div id="keyword-search-button" class="font-bold py-2 px-4 rounded" type="button">
               キーワード検索
             </div>
               <x-input-label for="keyword"/>
               <x-text-input id="keyword" placeholder="例：ペンギン" class="block mt-1 w-full" type="text" name="keyword" :value="old('keyword')" autofocus />
-              <div class="flex items-center justify-end mt-4">
-                <button type="submit" class="bg-teal-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  {{ __('検索する') }}
-                </button>
-              </div>
-          </form>
-
-          
-          
-          <form>
-              <div id="prefecture-search-button" class="bg-teal-400 text-white font-bold py-2 px-4 rounded">
+              <br>
+              <div id="prefecture-search-button" class="font-bold py-2 px-4 rounded">
                 都道府県で検索する
               </div>
-                <select id="prefecture" name="prefecture" class="block mt-1 w-full" required>
+                <select id="prefecture" name="prefecture" class="block mt-1 w-full">
                   <option value="">選択してください</option>
                   <option value="北海道">北海道</option>
                   <option value="青森県">青森県</option>
@@ -75,12 +66,20 @@
                   <option value="鹿児島県">鹿児島県</option>
                   <option value="沖縄県">沖縄県</option>
                 </select>
-                <div class="flex items-center justify-end mt-4">
+              
+              <div class="flex items-center justify-end mt-4">
                 <button type="submit" class="bg-teal-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    {{ __('検索する') }}
+                  {{ __('検索する') }}
                 </button>
-                </div>
-              </form>
+              </div>
+              <div class="flex items-center justify-end mt-4">
+                <a href="{{ route('content.index') }}" class="text-gray-400 text-sm">検索クリア</a>
+              </div>
+          </form>
+          @if(count($contents) == 0)
+            <p>該当するコンテンツが見つかりませんでした。</p>
+          @endif
+          
               <script>
                 const prefectureSearchButton = document.getElementById('prefecture-search-button');
                 const prefectureSelect = document.getElementById('prefecture-select');
@@ -95,6 +94,7 @@
                 keywordSearchButton.addEventListener('click', function() {
                   keywordSelect.classList.toggle('hidden');
                 });
+                
                 
               </script>
              

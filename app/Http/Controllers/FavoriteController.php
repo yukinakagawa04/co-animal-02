@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Content;
+use App\Models\Admin;
 use Auth;
 
 class FavoriteController extends Controller
@@ -36,7 +37,10 @@ class FavoriteController extends Controller
      */
     public function store(Content $content)
     {
+        $content->users()->detach(Auth::id());
+        $content->admins()->detach(Auth::guard('admin')->user()->id);
         $content->users()->attach(Auth::id());
+        $content->admins()->attach(Auth::guard('admin')->user()->id);
         return back();
     }
 
@@ -83,6 +87,8 @@ class FavoriteController extends Controller
     public function destroy(Content $content)
     {
         $content->users()->detach(Auth::id());
+        $admin_id = Auth::guard('admin')->user()->id;
+        $content->admins()->detach($admin_id);
         return back();
     }
 }

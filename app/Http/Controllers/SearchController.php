@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\User;
+use App\Models\Admin;
 
 class SearchController extends Controller
 {
@@ -15,27 +16,33 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
-        // リクエストからキーワードを取得
-        $keyword = trim($request->input('keyword'));
-    
-        // 名前にキーワードを含むユーザーの ID を取得
-        $userIds = User::where('name', 'like', "%{$keyword}%")->pluck('id')->toArray();
-        
-        // prefectureカラムにキーワードを含むユーザーの ID を取得
-        $userIdsFromPrefecture = Admin::where('prefecture', 'like', "%{$keyword}%")->pluck('id')->toArray();
-    
-        // 名前またはprefectureカラムにキーワードを含むユーザーの ID をマージ
-        $userIds = array_unique(array_merge($userIds, $userIdsFromPrefecture));
-    
-        // コンテンツを検索
-        $contents = Content::query()
-            ->where('title_content', 'like', "%{$keyword}%")
-            ->orWhereIn('user_id', $userIds)
-            ->get();
-    
-        // 結果をビューに渡す
+        $keyword = $request->input('keyword');
+        $prefecture = $request->input('prefecture');
+
+        if (empty($keyword) && empty($prefecture)) {
+            // エラーメッセージを表示する
+            return redirect()->back()->with('error', 'キーワードまたは都道府県を入力してください。');
+        }
+
+        $contents = Content::query();
+
+        if (!empty($keyword)) {
+            $users  = User::where('name', 'like', "%{$keyword}%")->pluck('id')->all();
+            $admins = Admin::where('prefecture', 'like', "%{$keyword}%")->pluck('id')->all();
+            $contents = $contents->where('title_content', 'like', "%{$keyword}%")
+                ->orWhereIn('user_id', $users);
+        }
+
+        if (!empty($prefecture)) {
+            $admins = Admin::where('prefecture', $prefecture)->pluck('id')->all();
+            $contents = $contents->whereIn('admin_id', $admins);
+        }
+
+        $contents = $contents->get();
         return response()->view('content.index', compact('contents'));
     }
+        
+    
 
     /**
      * Show the form for creating a new resource.
