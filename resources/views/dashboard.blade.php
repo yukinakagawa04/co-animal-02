@@ -35,7 +35,7 @@
                         <div class="h-16 flex items-center justify-center">
                             <a href="content" class="inline-block text-center font-semibold text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-50 bg-teal-400 text-white rounded-sm py-3 px-6">{{ __('もっと見る') }}</a>
                         </div>
-                            <a href="partner" class="hidden">{{ __('もっと見る') }}</a>
+                            
                     </div>
                 </div>
                 

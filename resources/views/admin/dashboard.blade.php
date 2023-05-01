@@ -29,7 +29,7 @@
                             <p  class="font-bold  text-lg ">新着順</p>
                         <br>
                         <!--新着の投稿をアップする-->
-                           
+                            @include('dashboard.content', ['contents' => $contents])
                         <!--フロントに全部出すデータ-->
                         <br>
                         <div class="h-16 flex items-center justify-center">

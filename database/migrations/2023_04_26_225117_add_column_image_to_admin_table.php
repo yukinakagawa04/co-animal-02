@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('admins', function (Blueprint $table) {
-            $table->string('prefecture')->after('name');
-        });
+        if (!Schema::hasColumn('admins', 'prefecture')) {
+            Schema::table('admins', function (Blueprint $table) {
+                $table->string('prefecture')->after('name');
+            });
+        }
     }
 
     /**
@@ -25,8 +27,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('admins', function (Blueprint $table) {
-            $table->dropColumn('prefecture');
-        });
+        if (Schema::hasColumn('admins', 'prefecture')) {
+            Schema::table('admins', function (Blueprint $table) {
+                $table->dropColumn('prefecture');
+            });
+        }
     }
 };

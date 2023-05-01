@@ -1,3 +1,5 @@
+
+
 <div class="max-w-xs mx-auto">
     @foreach ($contents as $content)
       <div class="border p-4 border-gray-600 border-1 rounded-lg bg-white col-md-4 col-12 my-4">
