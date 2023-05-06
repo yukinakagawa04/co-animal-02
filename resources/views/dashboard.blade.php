@@ -1,8 +1,9 @@
 
     <head>
+        <!--favicon-->
+        <link rel="icon" type="image/png" href="{{ asset('images/logo01.png') }}">
         <title>co-animal｜TOP</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-NKq3zHdJ+XV0gDkIhTDK2J0CfhZsWc4Jg4vi6FQH6I52nX16eN6SvEYIR3L6nHm8WxjKf0gfZ1di/UZzIV9XWQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     </head>
     <body>
         
