@@ -7,7 +7,7 @@ use Validator;
 use App\Models\Content;
 use Auth;
 use App\Models\User;
-use App\Http\Controllers\Admin;
+
 
 
 class ContentController extends Controller
@@ -19,8 +19,16 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $contents = Content::getAllOrderByUpdated_at();
-        return response()->view('content.index',compact('contents'));
+        // 一般ユーザーが投稿したコンテンツを取得
+    $contents = Content::getAllOrderByUpdated_at();
+
+    // 管理者としてログインしている場合、管理者が投稿したコンテンツも取得
+    if (Auth::guard('admin')->check()) {
+        $adminContents = Auth::guard('admin')->user()->contents()->orderBy('updated_at', 'desc')->get();
+        $contents = $contents->merge($adminContents);
+    }
+
+    return response()->view('content.index', compact('contents'));
     }
     
     
@@ -87,7 +95,8 @@ class ContentController extends Controller
         // 戻り値は挿入されたレコードの情報
         $result = Content::create($data);
         // ルーティング「partner.index」にリクエスト送信（一覧ページに移動）
-        return redirect()->route("content.index", "dashboard");
+        return redirect()->route("content.index", "dashboard", "admin.dashboard");
+    
     }
 
     /**
@@ -140,13 +149,22 @@ class ContentController extends Controller
     // マイデータのところ
     public function mydata()
     {
-    // Userモデルに定義したリレーションを使用してデータを取得する．
-    $contents = User::query()
-      ->find(Auth::user()->id)
-      ->contents()
-      ->orderBy('created_at','desc')
-      ->get();
-    return response()->view('content.index', compact('contents'));
+        // Userモデルに定義したリレーションを使用してデータを取得する．
+        $contents = User::query()
+         ->find(Auth::guard('admin')->user() ? Auth::guard('admin')->user()->id : Auth::user()->id)
+          ->contents()
+          ->orderBy('created_at','desc')
+          ->get();
+          
+        // 管理者の場合
+        if (Auth::guard('admin')->check()) {
+            $adminContents = Auth::guard('admin')->user()->contents()->orderBy('created_at', 'desc')->get();
+            $contents = $contents->merge($adminContents);
+        }
+          
+        return response()->view('content.index', compact('contents'));
     }
+    
+    
 
 }

@@ -33,7 +33,7 @@
                         <!--都道府県-->
                         <p>{{ $content->admin ? $content->admin->prefecture : '' }}</p>
                         <!-- favorite 状態で条件分岐 -->
-                        @if($content->users()->where('user_id', Auth::id())->exists() || $content->admins()->where('admin_id', Auth::guard('admin')->user()->id)->exists())
+                          @if($content->users()->where('user_id', Auth::id())->exists() || (Auth::guard('admin')->user() && $content->admins()->where('admin_id', Auth::guard('admin')->user()->id)->exists()))
                           <!-- unfavorite ボタン -->
                           <form action="{{ route('unfavorites',$content) }}" method="POST" class="text-left">
                             @csrf

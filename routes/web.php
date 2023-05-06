@@ -14,6 +14,8 @@ use App\Http\Controllers\ProfileController as ProfileOfAdminController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminProfileController;
 
 
 /*
@@ -51,16 +53,19 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
         //ログアウト
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
         // ダッシュボード
-        Route::get('dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
-                
+        Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');        
         });
+        //編集
+        Route::match(['get', 'post'], '/admin/profile', [AdminProfileController::class, 'edit'])->name('admin.profile.edit');
+        Route::put('/admin/profile/{id}', [AdminProfileController::class, 'update'])->name('admin.profile.update');
+
     });
 
 
 
-    // 🔽 追加（検索画面）
+    // 検索画面
     Route::get('/content/search/input', [SearchController::class, 'create'])->name('search.input');
-    // 🔽 追加（検索処理）
+    // 検索処理
     Route::get('/content/search/result', [SearchController::class, 'index'])->name('search.result');
     // いいね機能
     Route::post('content/{content}/favorites', [FavoriteController::class, 'store'])->name('favorites');
@@ -75,51 +80,51 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
     Route::get('/content', [ContentController::class, 'index'])->name('test');
 
 
-// コメント機能
-Route::post('comment/{content_id}', [CommentController::class, 'store'])->name('comment.store');
-Route::get('/comment/{content_id}', [CommentController::class,'show'])->name('comments.show');
-
-Route::get('comment/{id}', function () {
-    return view('comment.show');
-})->name('comment.show');
-
-Route::resource('tweet', TweetController::class);
-Route::resource('partner', PartnerController::class);
-Route::resource('content', ContentController::class);
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::get('/service', function () {
-    return view('service');
-    })->name('service');
-
-Route::get('/contact', function () {
-    return view('contact');
-    })->name('contact');
+    // コメント機能
+    Route::post('comment/{content_id}', [CommentController::class, 'store'])->name('comment.store');
+    Route::get('/comment/{content_id}', [CommentController::class,'show'])->name('comments.show');
+    
+    Route::get('comment/{id}', function () {
+        return view('comment.show');
+    })->name('comment.show');
+    
+    Route::resource('tweet', TweetController::class);
+    Route::resource('partner', PartnerController::class);
+    Route::resource('content', ContentController::class);
+    
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    Route::get('/service', function () {
+        return view('service');
+        })->name('service');
+    
+    Route::get('/contact', function () {
+        return view('contact');
+        })->name('contact');
+    
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->middleware(['auth', 'verified'])
+        ->name('dashboard');
 
 
-// 管理者
-Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
-  //ここにルートを記述
-});
-
-// 飼育員
-Route::group(['middleware' => ['auth', 'can:business-higher']], function () {
-  //ここにルートを記述
-});
-
-//一般ユーザー
-Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
-  //ここにルートを記述
-});
+    // 管理者
+    Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
+      //ここにルートを記述
+    });
+    
+    // 飼育員
+    Route::group(['middleware' => ['auth', 'can:business-higher']], function () {
+      //ここにルートを記述
+    });
+    
+    //一般ユーザー
+    Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
+      //ここにルートを記述
+    });
 
 
 

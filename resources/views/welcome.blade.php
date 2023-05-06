@@ -18,35 +18,14 @@
     <body class="antialiased">
 
             <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-               @if (Route::has('admin.login'))
-                @auth
-                    <div>
-                        <a href="{{ url('Admin/dashboard') }}"  class="mr-5 hover:text-gray-900">飼育員マイページ</a>
-                    </div>
-                @else
-                
                     <a href="{{ route('admin.login') }}"  class="mr-5 hover:text-gray-900">飼育員ログイン</a>
-                    
-                        @if (Route::has('admin.register'))
                     <a href="{{ route('admin.register') }}"  class="mr-5 hover:text-gray-900">飼育員新規登録</a>
-                        @endif
-                     @endauth
-                 </nav>
-             @endif
-             
+            </nav>
              <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-             @if (Route::has('login'))
-                 @auth
-                  <a href="{{ url('/dashboard') }}" class="mr-5 hover:text-gray-900">ユーザーマイページ</a>
-                      @else
-                      <a href="{{ route('login') }}"  class="mr-5 hover:text-gray-900">ユーザーログイン</a>
-              
-                           @if (Route::has('register'))
-              <a href="{{ route('register') }}" class="mr-5 hover:text-gray-900">ユーザー新規登録</a>
-                    @endif
-               @endauth
-             </nav>
-             @endif
+                        <a href="{{ route('login') }}" class="mr-5 hover:text-gray-900">ユーザーログイン</a>
+                        <a href="{{ route('register') }}"  class="mr-5 hover:text-gray-900">ユーザー新規登録</a>
+            </nav>
+
         
             <div class="max-w-7xl mx-auto p-6 lg:p-8"  bg-white-100>
                 <div class="sm:flex sm:justify-center">
@@ -55,7 +34,7 @@
                 
                     <br>
                 </div>
-                    <img src="{{ asset('images/banner02.png') }}" alt="">
+                    <img src="{{ asset('images/banner03.png') }}" alt="">
                 <div class="sm:flex sm:justify-center">
                     <div class="">
                     <br>

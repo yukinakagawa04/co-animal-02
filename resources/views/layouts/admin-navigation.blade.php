@@ -39,48 +39,36 @@
         </div>
       </div>
       <!-- Settings Dropdown -->
-      <div class="hidden sm:flex sm:items-center sm:ml-6">
+      <div class="sm:flex sm:items-center sm:ml-6">
       <!--🔽 contact-->
       <!--<div class="inline-block h-15 w-56 text-center font-semibold text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-50 bg-teal-400 text-white rounded-sm py-2">-->
-      <!--  <a href="{{ route('contact') }}" >{{ __('飼育員の方へ') }}<br>{{ __('チャンネル開設のお申し込み') }}</a>-->
+      <a href="{{ route('contact') }}" >{{ __('飼育員の方へ') }}<br>{{ __('チャンネル開設のお申し込み') }}</a>
       <!--</div>-->
-        <x-dropdown align="right" width="48">
-          <x-slot name="trigger">
-            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500  bg-white  hover:text-gray-700  focus:outline-none transition ease-in-out duration-150">
-              <div>{{ Auth::guard('admin')->user()->name }}</div>
-
+      <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+          <button @click="open = !open" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+            <!--ユーザーネーム表示：飼育員はadmin、ユーザーはuser-->
+            <div>
+              {{ Auth::guard('admin')->user()->name }}
+            </div>
               <div class="ml-1">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
-                  <path fill="#21CCC0" d="M256,288c70.7,0,128-57.3,128-128S326.7,32,256,32S128,89.3,128,160S185.3,288,256,288z M256,352c-58.8,0-111.6,28.6-144.6,72.6 C123,454.9,135,480,157.2,480h197.6c22.2,0,34.2-25.1,21.8-39.4C367.6,380.6,314.8,352,256,352z"/>
-                </svg>
-              </div>
-            </button>
-          </x-slot>
-
-          <x-slot name="content">
-              <x-dropdown-link :href="route('profile.edit')">
-                  {{ __('プロフィール') }}
-              </x-dropdown-link>
-          
-              <!-- Authentication -->
-              <form method="POST" action="{{ route('adminlogout') }}">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
+                <path fill="#21CCC0" d="M256,288c70.7,0,128-57.3,128-128S326.7,32,256,32S128,89.3,128,160S185.3,288,256,288z M256,352c-58.8,0-111.6,28.6-144.6,72.6 C123,454.9,135,480,157.2,480h197.6c22.2,0,34.2-25.1,21.8-39.4C367.6,380.6,314.8,352,256,352z" />
+              </svg>
+            </div>
+          </button>
+            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute z-50 mt-2 w-48 rounded-md shadow-lg origin-top-right right-0" style="display: none;" @click="open = false">
+              <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white">
+                
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
                   @csrf
-          
-                  @if (Auth::guard('admin')->check())
-                      <x-dropdown-link :href="route('adminlogout')" onclick="event.preventDefault();
-                          this.closest('form').submit();">
-                          {{ __('管理者ログアウト') }}
-                      </x-dropdown-link>
-                  @else
-                      <x-dropdown-link :href="route('adminlogout')" onclick="event.preventDefault();
-                          this.closest('form').submit();">
-                          {{ __('ログアウト') }}
-                      </x-dropdown-link>
-                  @endif
-              </form>
-          </x-slot>
-
-        </x-dropdown>
+                  <x-dropdown-link :href="route('adminlogout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                    {{ __('管理者ログアウト') }}
+                  </x-dropdown-link>
+                </form>
+              </div>
+            </div>
+          </div>
       </div>
 
       <!-- Hamburger -->
