@@ -92,10 +92,13 @@ use App\Http\Controllers\Admin\AdminProfileController;
     Route::resource('partner', PartnerController::class);
     Route::resource('content', ContentController::class);
     
+    // Route::get('/', function () {
+    //     return view('welcome');
+    // });
+    
     Route::get('/', function () {
         return view('welcome');
-    });
-
+    })->name('welcome');
 
     Route::get('/service', function () {
         return view('service');
