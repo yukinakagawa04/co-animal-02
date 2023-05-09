@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-
+use Illuminate\Support\Str; //remember_tokenに必要
 
 class AdminRegisterController extends Controller
 {
@@ -26,55 +24,27 @@ class AdminRegisterController extends Controller
     // 登録実行
     public function store(Request $request): RedirectResponse
     {
-        
-        
-        // $request->validate([
-        //     'name' => 'required | max:191',
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Admin::class],
-        //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        //     'perfecture' => ['required', 'in:北海道,青森県,岩手県,宮城県,秋田県,山形県,福島県,茨城県,栃木県,群馬県,埼玉県,千葉県,東京都,神奈川県,新潟県,富山県,石川県,福井県,山梨県,長野県,岐阜県,静岡県,愛知県,三重県,滋賀県,京都府,大阪府,兵庫県,奈良県,和歌山県,鳥取県,島根県,岡山県,広島県,山口県,徳島県,香川県,愛媛県,高知県,福岡県,佐賀県,長崎県,熊本県,大分県,宮崎県,鹿児島県,沖縄県'],
-        //     'image' => 'required',
-        //     'description' => 'required',
-        // ]);
-        
-        
-        
-       
-        
-        if(request()->hasFile('image')){
-            $original=request()->file("image")->getClientOriginalName();
-            $name=date("Ymd_His")."_".$original;
-            request()->file("image")->move('storage/admin/images',$name);
-            $imagePath = 'storage/images/' . $name;
-        }
-        
-        // if(request('image_content')){
-        //     $original = request() -> file("image_content") -> getClientoriginalName();
-        //     $name = date("Ymd_His")."_".$original; 
-        //     request() -> file("image_content") -> move("storage/contents/images", $name);
-        //     $content -> image_content =  $name;
-        // }   
-        
-        
-        $admin = Admin::create([
+        $adminData = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'email_verified_at' => null,
             'password' => Hash::make($request->input('password')),
             'remember_token' => null,
+            'image' => $request->input('image'),
             'prefecture' => $request->input('prefecture'),
-            'image' => isset($imagePath) ? $imagePath : '',
             'description' => $request->input('description'),
-        ]);
-
+        ];
+        
+        $admin = Admin::create($adminData);
+        
+        // email_verified_atを更新する
+        $admin->email_verified_at = date("Y-m-d H:i:s");
+        $admin->remember_token = Str::random(10); // ランダムな文字列を生成する
+        $admin->save();
+        
         event(new Registered($admin));
-
         Auth::guard('admin')->login($admin);
-
         return redirect()->route("admin.login");
 
-        
-        
-        
     }
 }

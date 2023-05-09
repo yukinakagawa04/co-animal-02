@@ -17,7 +17,9 @@
                       <a href="{{ route('content.show',$content->id) }}">
                         <!--ユーザーネーム-->
                         @if ($content->admin)
-                          <p class="text-gray-800 mx-auto">{{ $content->admin->name }}</p>
+                          <div class="text-gray-800 mx-auto">
+                            <img src="{{ $content->admin ? $content->admin->image : '' }}" alt="{{ $content->admin->name }}" style="border-radius: 5px;">
+                          </div>
                         @endif
                         <!--タイトル-->
                         <h3 class="font-bold text-lg text-gray-dark mx-auto ">{{$content->title_content}}</h3>

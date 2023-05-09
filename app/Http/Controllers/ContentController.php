@@ -55,6 +55,7 @@ class ContentController extends Controller
         $content = new Content();
                 //idの
                 $content->admin_id = Auth::guard('admin')->user()->id;
+
                 //title_contentの
                 $content -> title_content = request() -> title_content;
                 //image_contentの

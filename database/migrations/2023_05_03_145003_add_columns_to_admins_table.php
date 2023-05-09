@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('admins', function (Blueprint $table) {
             $table->string('image')->nullable();
             $table->string('prefecture')->nullable();
-            $table->text('description')->nullable();
+            $table->string('description', 1000)->nullable();
         });
     }
 
