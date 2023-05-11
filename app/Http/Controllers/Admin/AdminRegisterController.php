@@ -30,16 +30,27 @@ class AdminRegisterController extends Controller
             'email_verified_at' => null,
             'password' => Hash::make($request->input('password')),
             'remember_token' => null,
-            'image' => $request->input('image'),
+            //imageは下に書いてる
             'prefecture' => $request->input('prefecture'),
             'description' => $request->input('description'),
         ];
         
         $admin = Admin::create($adminData);
         
+        // 日付を取得する
+        $date = date("Ymd");
+        
+        // 画像ファイル名に日付を追加する
+        if (request()->hasFile('image')) {
+            $image = $date . '_' . $request->file('image')->getClientOriginalName();
+            request()->file("image")->move('storage/admin/images', $image);
+            $admin->image = $image;
+        }
         // email_verified_atを更新する
         $admin->email_verified_at = date("Y-m-d H:i:s");
-        $admin->remember_token = Str::random(10); // ランダムな文字列を生成する
+        
+        // ランダムな文字列を生成する
+        $admin->remember_token = Str::random(10);
         $admin->save();
         
         event(new Registered($admin));

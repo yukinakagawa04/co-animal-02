@@ -1,6 +1,6 @@
 <x-guest-layout>
     <h1 class="text-white">Adminの登録</h1>
-    <form method="POST" action="{{ route('admin.store') }}">
+    <form method="POST" action="{{ route('admin.store') }}" enctype="multipart/form-data">
         @csrf
 
         <!-- Name -->

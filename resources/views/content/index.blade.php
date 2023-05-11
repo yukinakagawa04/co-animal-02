@@ -17,8 +17,9 @@
                       <a href="{{ route('content.show',$content->id) }}">
                         <!--ユーザーネーム-->
                         @if ($content->admin)
-                          <div class="text-gray-800 mx-auto">
-                            <img src="{{ $content->admin ? $content->admin->image : '' }}" alt="{{ $content->admin->name }}" style="border-radius: 5px;">
+                          <div class="flex items-center">
+                            <img src="{{ asset('storage/admin/images/' . $content->admin->image) }}" alt="{{ $content->admin->name }}" style="border-radius: 50%; width: 50px; height: 50px;" class="mr-2">
+                            <p>{{ $content->admin->name }}</p>
                           </div>
                         @endif
                         <!--タイトル-->
@@ -33,7 +34,7 @@
                         <!--音声ファイル-->
                         <audio controls src="{{ asset('storage/contents/audios/'.$content->audio)}}" class="mx-auto"></audio>
                         <!--都道府県-->
-                        <p>{{ $content->admin ? $content->admin->prefecture : '' }}</p>
+                        <p style="display: none;">{{ $content->admin ? $content->admin->prefecture : '' }}</p>
                         <!-- favorite 状態で条件分岐 -->
                           @if($content->users()->where('user_id', Auth::id())->exists() || (Auth::guard('admin')->user() && $content->admins()->where('admin_id', Auth::guard('admin')->user()->id)->exists()))
                           <!-- unfavorite ボタン -->
