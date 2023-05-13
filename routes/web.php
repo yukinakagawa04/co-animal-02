@@ -83,6 +83,10 @@ use App\Http\Controllers\Admin\AdminProfileController;
     // コメント機能
     Route::post('comment/{content_id}', [CommentController::class, 'store'])->name('comment.store');
     Route::get('/comment/{content_id}', [CommentController::class,'show'])->name('comments.show');
+    Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+    Route::get('/comment/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
+    Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
+
     
     Route::get('comment/{id}', function () {
         return view('comment.show');

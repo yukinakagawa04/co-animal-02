@@ -54,7 +54,16 @@ class ContentController extends Controller
         //送る内容を再度定義する
         $content = new Content();
                 //idの
-                $content->admin_id = Auth::guard('admin')->user()->id;
+                if (Auth::guard('admin')->check()) {
+                    $content->admin_id = Auth::guard('admin')->user()->id;
+                } elseif (Auth::check()) {
+                    $content->user_id = Auth::user('user')->id;
+                } else {
+                    // ユーザーがログインしていない場合の処理
+                    // 例えば、デフォルトの値を設定するなど
+                    $content->admin_id = null;
+                }
+                // $content->admin_id = Auth::guard('admin')->user()->id;
 
                 //title_contentの
                 $content -> title_content = request() -> title_content;

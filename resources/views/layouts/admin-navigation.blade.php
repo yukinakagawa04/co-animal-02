@@ -60,7 +60,7 @@
               <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white">
                 
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('adminlogout') }}">
                   @csrf
                   <x-dropdown-link :href="route('adminlogout')" onclick="event.preventDefault(); this.closest('form').submit();">
                     {{ __('管理者ログアウト') }}

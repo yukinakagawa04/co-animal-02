@@ -8,8 +8,21 @@
         <!--コメント一覧の表示-->
             @if (isset($comments) && count($comments) > 0)
                 @foreach ($comments as $comment)
-                    <h3>{{ $comment->comment }}</h3>
-                    <p>{{ $comment->created_at }}</p>
+                    <!--コメントテキスト表示-->
+                    <h3 class="font-bold text-sm text-teal-400">{{ $comment->user->name }}</h3>
+                    <p>{{ $comment->comment }}</p>
+                    <p class="text-gray-400 text-sm">{{ $comment->created_at->diffForHumans() }}</p>
+                    <div class="flex">
+                        <!-- 削除ボタン -->
+                        <form action="{{ route('comment.destroy', $comment->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="font-bold text-sm text-gray-400 mr-2">削除</button>
+                        </form>
+                        <!-- 更新ボタン -->
+                        <a href="{{ route('comment.edit', $comment->id) }}" class="font-bold text-sm text-gray-400">更新</a>
+                    </div>
+
                     <hr>
                 @endforeach
             @else

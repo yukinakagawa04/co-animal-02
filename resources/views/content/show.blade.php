@@ -23,10 +23,9 @@
                   <br>
                     <audio controls src="{{ asset('storage/contents/audios/'.$content->audio)}}" class="mx-auto"></audio>
                 <!--都道府県をhiddenで表示-->
-                <p class="text-gray-800 mx-auto text-center">{{ $content->admin->prefecture }}</p>
+                <p style="display: none;" class="text-gray-800 mx-auto text-center">{{ $content->admin->prefecture }}</p>
                 <!-- favorite 状態で条件分岐 -->
-                  <!-- favorite 状態で条件分岐 -->
-                        @if($content->users()->where('user_id', Auth::id())->exists() || $content->admins()->where('admin_id', Auth::guard('admin')->user()->id)->exists())
+                      @if(Auth::check() && $content->users()->where('user_id', Auth::id())->exists() || (Auth::guard('admin')->check() && $content->admins()->where('admin_id', Auth::guard('admin')->user()->id)->exists()))
                           <!-- unfavorite ボタン -->
                           <form action="{{ route('unfavorites',$content) }}" method="POST" class="text-left">
                             @csrf
@@ -69,6 +68,7 @@
                           @csrf
                           <div class="mb-4">
                             <input type="hidden" name="content_id" value="{{ $content->id }}">
+                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                             <x-input-label for="comment" :value="__('コメント')" />
                             <x-text-input id="comment" class="block mt-1 w-full" type="text" name="comment" :value="old('comment')" required autofocus />
                             <x-input-error :messages="$errors->get('comment')" class="mt-2" />

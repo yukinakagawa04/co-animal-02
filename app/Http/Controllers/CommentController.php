@@ -45,10 +45,11 @@ class CommentController extends Controller
         $comment->user_id = $user->id;
         $comment->content_id = $data['content_id'];
         $comment->save();
-        
         $comments = Comment::where('content_id', $data['content_id'])
                             ->orderBy('created_at', 'desc')
                             ->get();
+        
+        //確認　dd($comments);
         return view('comment.show', ['comments' => $comments]);
     }
     
@@ -56,10 +57,9 @@ class CommentController extends Controller
 
     public function show(Request $request, $content_id)
     {
-        $this->middleware('auth')->except('store');
         $comments = Comment::where('content_id', $content_id)
-                               ->orderBy('created_at', 'desc')
-                               ->get();
+                           ->orderBy('created_at', 'desc')
+                           ->get();
         return view('comment', compact('comments'));
     }
 
@@ -69,9 +69,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comment $comment)
     {
-        //
+        return view('comment.edit', compact('comment'));
     }
 
     /**
@@ -81,19 +81,29 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comment $comment)
     {
-        //
+        $request->validate([
+            'comment' => 'required|max:191',
+        ]);
+    
+        $comment->comment = $request->comment;
+        $comment->save();
+        return redirect()->route('content.show', ['content' => $comment->content_id])->with('success', 'コメントを更新しました。');
+
     }
 
+        
+            
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect()->back()->with('success', 'コメントを削除しました。');
     }
 }
