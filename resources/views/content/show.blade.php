@@ -87,12 +87,11 @@
                       
                       <!--userとadminでコメント一覧の条件分岐をする-->
                       <div class="flex items-center justify-end mt-4">
-                          
-                              <!-- ユーザー名の表示 -->
-                              <a href="{{ route('admin.comments.show', $content->id) }}" class="text-sm text-gray-500 underline">{{ __('コメント一覧を表示する') }}</a>
-                              
-                              <a href="{{ route('comments.show', $content->id) }}" class="text-sm text-gray-500 underline">{{ __('コメント一覧を表示する') }}</a>
-                              
+                      @if (Auth::guard('admin')->check())
+                        <a href="{{ route('admin.comments.show', $content->id) }}" class="text-sm text-gray-500 underline">{{ __('コメント一覧を表示する') }}</a>
+                      @else        
+                        <a href="{{ route('comments.show', $content->id) }}" class="text-sm text-gray-500 underline">{{ __('コメント一覧を表示する') }}</a>
+                      @endif
                           
                       </div>
           

@@ -20,6 +20,6 @@ class AdminCommentController extends Controller
                            ->orderBy('created_at', 'desc')
                            ->get();
     
-        return view('admin.comment.show', compact('comments'));
+        return view('admin.comment.index', compact('comments'));
     }
 }
