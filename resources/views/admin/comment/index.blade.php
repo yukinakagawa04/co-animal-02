@@ -8,12 +8,8 @@
         <!--コメント一覧の表示-->
             @if (isset($comments) && count($comments) > 0)
                 @foreach ($comments as $comment)
-                    <!-- ユーザー名の表示 -->
-                    @if ($comment->user)
-                        <h3 class="font-bold text-sm text-teal-400">{{ $comment->user->name }}</h3>
-                    @elseif ($comment->admin)
-                        <h3 class="font-bold text-sm text-teal-400">{{ $comment->admin->name }}</h3>
-                    @endif
+                    <!--コメントテキスト表示-->
+                    <h3 class="font-bold text-sm text-teal-400">{{ $comment->user->name }}</h3>
                     <p>{{ $comment->comment }}</p>
                     <p class="text-gray-400 text-sm">{{ $comment->created_at->diffForHumans() }}</p>
                     <div class="flex">

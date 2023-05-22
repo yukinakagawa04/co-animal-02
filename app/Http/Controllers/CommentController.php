@@ -42,7 +42,13 @@ class CommentController extends Controller
         
         $comment = new Comment();
         $comment->comment = $data['comment'];
-        $comment->user_id = $user->id;
+        // $comment->user_id = $user->id;
+        if (Auth::guard('admin')->check()) {
+        $comment->admin_id = $user->id;
+        } else {
+            $comment->user_id = $user->id;
+        }
+        
         $comment->content_id = $data['content_id'];
         $comment->save();
         $comments = Comment::where('content_id', $data['content_id'])

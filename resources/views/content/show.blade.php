@@ -68,7 +68,11 @@
                           @csrf
                           <div class="mb-4">
                             <input type="hidden" name="content_id" value="{{ $content->id }}">
-                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                            @if(auth()->check())
+                              <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                            @elseif(auth()->guard('admin')->check())
+                              <input type="hidden" name="admin_id" value="{{ auth()->guard('admin')->user()->id }}">
+                            @endif
                             <x-input-label for="comment" :value="__('コメント')" />
                             <x-text-input id="comment" class="block mt-1 w-full" type="text" name="comment" :value="old('comment')" required autofocus />
                             <x-input-error :messages="$errors->get('comment')" class="mt-2" />
@@ -81,8 +85,15 @@
                         </form>
                       </div>
                       
+                      <!--userとadminでコメント一覧の条件分岐をする-->
                       <div class="flex items-center justify-end mt-4">
-                        <a href="{{ route('comments.show', $content->id) }}" class="text-sm text-gray-500 underline">{{ __('コメント一覧を表示する') }}</a>
+                          
+                              <!-- ユーザー名の表示 -->
+                              <a href="{{ route('admin.comments.show', $content->id) }}" class="text-sm text-gray-500 underline">{{ __('コメント一覧を表示する') }}</a>
+                              
+                              <a href="{{ route('comments.show', $content->id) }}" class="text-sm text-gray-500 underline">{{ __('コメント一覧を表示する') }}</a>
+                              
+                          
                       </div>
           
 

@@ -28,8 +28,10 @@ class Comment extends Model
         {
         return $this->belongsTo(User::class);
         }
-    
-
+    public function admin()
+        {
+        return $this->belongsTo(Admin::class, 'admin_id');
+        }   
     
 }
  

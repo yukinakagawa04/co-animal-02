@@ -51,6 +51,15 @@ class Admin extends Authenticatable
         return $this->id;
     }
     
+    //adminコメント機能
+    public function comments()
+    {
+        //return $this->hasMany(Comment::class);
+        return $this->morphMany(Comment::class, 'user');
+    }
+    
+        
+
     
 }
 

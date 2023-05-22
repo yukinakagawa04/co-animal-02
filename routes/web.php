@@ -58,6 +58,10 @@ use App\Http\Controllers\Admin\AdminProfileController;
         //編集
         Route::match(['get', 'post'], '/admin/profile', [AdminProfileController::class, 'edit'])->name('admin.profile.edit');
         Route::put('/admin/profile/{id}', [AdminProfileController::class, 'update'])->name('admin.profile.update');
+        // admincommentcontrollerへ移動
+        Route::get('/admin/comments/{content_id}', [AdminCommentController::class,'show'])->name('admin.comments.show');
+        //adminコメント一覧の表示
+        Route::get('/admin/comments', [AdminCommentController::class,'index'])->name('admin.comments.index');
 
     });
 
@@ -82,6 +86,7 @@ use App\Http\Controllers\Admin\AdminProfileController;
 
     // コメント機能
     Route::post('comment/{content_id}', [CommentController::class, 'store'])->name('comment.store');
+    //コメント一覧を表示する
     Route::get('/comment/{content_id}', [CommentController::class,'show'])->name('comments.show');
     Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
     Route::get('/comment/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');

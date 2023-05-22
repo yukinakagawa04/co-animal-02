@@ -43,6 +43,13 @@ class User extends Authenticatable
         return $this->hasMany(Content::class);
         }
     
+    //コメント機能
+    public function comments()
+    {
+        //return $this->hasMany(Comment::class);
+        return $this->morphMany(Comment::class, 'user');
+
+    }
    
-    
+
 }
