@@ -17,17 +17,18 @@
                     @endif
                     <p>{{ $comment->comment }}</p>
                     <p class="text-gray-400 text-sm">{{ $comment->created_at->diffForHumans() }}</p>
-                    <div class="flex">
-                        <!-- 削除ボタン -->
-                        <form action="{{ route('comment.destroy', $comment->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="font-bold text-sm text-gray-400 mr-2">削除</button>
-                        </form>
-                        <!-- 更新ボタン -->
-                        <a href="{{ route('comment.edit', $comment->id) }}" class="font-bold text-sm text-gray-400">更新</a>
-                    </div>
-
+                    @if ($comment->admin_id === Auth::guard('admin')->user()->id)
+                        <div class="flex">
+                            <!-- 削除ボタン -->
+                            <form action="{{ route('admin.comment.destroy', $comment->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="font-bold text-sm text-gray-400 mr-2">削除</button>
+                            </form>
+                            <!-- 更新ボタン -->
+                            <a href="{{ route('admin.comment.edit', $comment->id) }}" class="font-bold text-sm text-gray-400">更新</a>
+                        </div>
+                    @endif
                     <hr>
                 @endforeach
             @else

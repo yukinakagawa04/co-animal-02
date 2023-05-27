@@ -62,7 +62,11 @@ use App\Http\Controllers\Admin\AdminCommentController;
         // admincommentcontrollerへ移動
         Route::get('/admin/comments/{content_id}', [AdminCommentController::class,'show'])->name('admin.comments.show');
         //adminコメント一覧の表示
-        Route::get('/admin/comments', [AdminCommentController::class,'index'])->name('admin.comments.index');
+        Route::get('/admin/comments/', [AdminCommentController::class,'index'])->name('admin.comments.index');
+        Route::get('/admin/comments/{content_id}', [AdminCommentController::class, 'show'])->name('admin.comments.show');
+        Route::delete('/admin/comments/{comment}', [AdminCommentController::class, 'destroy'])->name('admin.comment.destroy');
+        Route::get('/admin/comments/{comment}/edit', [AdminCommentController::class, 'edit'])->name('admin.comment.edit');
+        Route::put('/admin/comment/{id}', [AdminCommentController::class, 'update'])->name('admin.comment.update');
 
     });
 
@@ -83,6 +87,9 @@ use App\Http\Controllers\Admin\AdminCommentController;
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/content', [ContentController::class, 'index'])->name('content.index');
     Route::get('/content', [ContentController::class, 'index'])->name('test');
+
+    
+
 
 
     // コメント機能
